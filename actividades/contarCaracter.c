@@ -16,11 +16,16 @@ int contarCaracter(char *array, char ch){
         }
         array++;
     }    
+    if (cnt == -1){
         return cnt;
+    }  else {
+        return cnt+1;
+    }
 }
 
 void test(){
+    char caracter = 'y';
     char cadena[]="palabra";
-    int veces= contarCaracter(cadena,'f');
-    printf("La cantidad de veces que aparece la letra 'a' es : %d\n", veces);
+    int veces= contarCaracter(cadena,caracter);
+    printf("La cantidad de veces que aparece la letra %c es : %d\n", caracter, veces);
 }
