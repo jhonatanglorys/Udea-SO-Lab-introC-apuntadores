@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int obtenerIndice(char *, char);
-int contarCaracter(char *, char);
+char *obtenerSubcadena(char *, int);
 void test(void);
 
 int main(){
@@ -9,33 +10,19 @@ int main(){
     return 0;
 }
 
-int obtenerIndice(char *array, char ch){
-    int indice = -1;
-    while (*array != '\0' && *array != ch){
-        indice++;
-        array++;
+char *obtenerSubcadena(char *array, int index){
+    int tamano = strlen(array) - index;
+    char *dest = (char*)malloc(sizeof(char)*tamano+1);
+    for (int i=index; i < strlen(array) && (*array != '\0'); i++){
+        *dest = *(array+i);
+        dest++;
     }
-    return indice+2;
+    *dest = '\0';
+    return dest - tamano;
 }
 
-int contarCaracter(char *array, char ch){
-    int cnt = -1;
-    while (*array != '\0'){
-        if(ch == *array ){
-            cnt++;
-        }
-        array++;
-    }    
-        return cnt;
-}
 void test(void){
-    char caracter = 'r';
-    char cadena[] = "palabra";
-    int veces = contarCaracter(cadena, caracter);
-    if(veces!= -1){
-        int indice = obtenerIndice(cadena, caracter);
-        printf("La posición del caracter %c es %d\n", caracter, indice);
-    } else {
-        printf("El caracter %c no se encuentra en la cadena. \n", caracter);
-    }
+    char cadena[] = "Hola que tal";
+    char* sub = obtenerSubcadena(cadena, 5);
+    printf("La nueva subcadena es: %s\n", sub); 
 }
